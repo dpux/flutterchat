@@ -1,4 +1,5 @@
 import 'package:chat/models/message_model.dart';
+import 'package:chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteContacts extends StatelessWidget {
@@ -35,31 +36,42 @@ class FavoriteContacts extends StatelessWidget {
         Container(
           height: 120.0,
           child: ListView.builder(
-            padding: EdgeInsets.only(left: 10.0),
-            scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.only(left: 10.0),
+              scrollDirection: Axis.horizontal,
               itemCount: favorites.length,
-              itemBuilder: (BuildContext buildContext, int index){
-                return Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-
-                    children: <Widget>[
-                      CircleAvatar(
-                        radius: 35.0,
-                        backgroundImage: AssetImage(favorites[index].imageUrl),
-                      ),
-                      SizedBox(height: 6.0,),
-                      Text(favorites[index].name,
-                       style: TextStyle(
-                         fontWeight: FontWeight.w600,
-                         color: Colors.blueGrey,
-                         fontSize: 16.0,
-                       ),)
-                    ],
+              itemBuilder: (BuildContext buildContext, int index) {
+                return GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => ChatScreen(
+                                user: favorites[index],
+                              ))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      children: <Widget>[
+                        CircleAvatar(
+                          radius: 35.0,
+                          backgroundImage:
+                              AssetImage(favorites[index].imageUrl),
+                        ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          favorites[index].name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.blueGrey,
+                            fontSize: 16.0,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
-              }
-          ),
+              }),
         )
       ],
     );
