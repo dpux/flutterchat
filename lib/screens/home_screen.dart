@@ -1,4 +1,5 @@
 import 'package:chat/widgets/category_selector.dart';
+import 'package:chat/widgets/favorite_contacts.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,6 +11,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.menu),
@@ -36,7 +38,24 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: <Widget>[
-          CategorySelector()
+          CategorySelector(),
+          Expanded(
+            child: Container(
+              height: 500.0,
+              decoration: BoxDecoration(
+                color: Theme.of(context).accentColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30.0),
+                  topRight: Radius.circular(30.0),
+                )
+              ),
+              child: Column(
+                children: <Widget>[
+                  FavoriteContacts()
+                ],
+              ),
+            ),
+          )
         ],
       )
     );
